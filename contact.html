@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="light">
+  <title>Contact Vessel 60</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Host+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    @font-face {
+      font-family: 'Nohemi';
+      src: url('fonts/Nohemi-Regular.woff2') format('woff2');
+      font-weight: 400;
+      font-display: swap;
+    }
+
+    @font-face {
+      font-family: 'Nohemi';
+      src: url('fonts/Nohemi-Medium.woff2') format('woff2');
+      font-weight: 500;
+      font-display: swap;
+    }
+
+    @font-face {
+      font-family: 'Nohemi';
+      src: url('fonts/Nohemi-Bold.woff2') format('woff2');
+      font-weight: 900;
+      font-display: swap;
+    }
+
+    :root {
+      color-scheme: light;
+      --cream: rgba(243, 243, 219);
+      --ink: rgba(51, 51, 51);
+      --ink-soft: rgba(51, 51, 51, 0.7);
+      --ink-faint: rgba(47, 47, 49, 0.45);
+      --ring: rgba(255, 255, 255);
+      --border: rgba(47, 47, 49, 0.35);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      height: 100%;
+    }
+
+    body {
+      font-family: 'Nohemi', sans-serif;
+      background-color: var(--cream);
+      color: var(--ink);
+    }
+
+    .page {
+      min-height: 100dvh;
+      display: flex;
+    }
+
+    /* Left panel: intro + ambient background photograph */
+    .intro {
+      position: relative;
+      flex: 1 1 42%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 64px;
+      overflow: hidden;
+    }
+
+    .intro .backdrop {
+      position: absolute;
+      inset: 0;
+      background-image: url('assets/background-vessel.jpg');
+      background-size: cover;
+      background-position: center;
+      opacity: 0.55;
+      mix-blend-mode: multiply;
+      -webkit-mask-image: linear-gradient(200deg, black 0%, black 55%, transparent 95%);
+      mask-image: linear-gradient(200deg, black 0%, black 55%, transparent 95%);
+      pointer-events: none;
+    }
+
+    .intro-content {
+      position: relative;
+      max-width: 480px;
+    }
+
+    .intro h1 {
+      font-size: clamp(2.5rem, 5vw, 3.75rem);
+      font-weight: 900;
+      letter-spacing: 0.01em;
+      line-height: 0.95;
+      text-transform: uppercase;
+    }
+
+    .intro p {
+      margin-top: 20px;
+      font-size: 1rem;
+      line-height: 1.5;
+      color: var(--ink-soft);
+      max-width: 34ch;
+    }
+
+    .back-link {
+      position: absolute;
+      top: 40px;
+      left: 64px;
+      z-index: 1;
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--ink);
+      text-decoration: none;
+      letter-spacing: 0.01em;
+    }
+
+    .back-link:hover {
+      text-decoration: underline;
+    }
+
+    /* Right panel: form */
+    .form-panel {
+      flex: 1 1 58%;
+      display: flex;
+      align-items: center;
+      padding: 64px;
+    }
+
+    form {
+      width: 100%;
+      max-width: 640px;
+      margin: 0 auto;
+    }
+
+    .field-row {
+      display: flex;
+      gap: 24px;
+    }
+
+    .field {
+      flex: 1;
+      margin-bottom: 22px;
+    }
+
+    label {
+      display: block;
+      font-size: 0.9rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    label .req {
+      font-weight: 400;
+      color: var(--ink-faint);
+    }
+
+    input[type="text"],
+    input[type="email"] {
+      width: 100%;
+      height: 46px;
+      padding: 0 20px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: transparent;
+      font-family: inherit;
+      font-size: 0.95rem;
+      color: var(--ink);
+      outline: none;
+      transition: border-color 0.2s ease;
+    }
+
+    textarea {
+      width: 100%;
+      min-height: 120px;
+      padding: 16px 20px;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      background: transparent;
+      font-family: inherit;
+      font-size: 0.95rem;
+      color: var(--ink);
+      outline: none;
+      resize: vertical;
+      transition: border-color 0.2s ease;
+    }
+
+    input:focus,
+    textarea:focus {
+      border-color: var(--ink);
+    }
+
+    .checkbox-field {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 22px;
+    }
+
+    .checkbox-field input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+      accent-color: var(--ink);
+      cursor: pointer;
+    }
+
+    .checkbox-field label {
+      margin-bottom: 0;
+      font-size: 0.9rem;
+      font-weight: 500;
+      cursor: pointer;
+    }
+
+    button[type="submit"] {
+      margin-top: 8px;
+      background: var(--ink);
+      color: var(--cream);
+      border: none;
+      border-radius: 5px;
+      padding: 14px 32px;
+      font-family: inherit;
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: opacity 0.2s ease;
+    }
+
+    button[type="submit"]:hover {
+      opacity: 0.85;
+    }
+
+    @media (max-width: 860px) {
+      .page {
+        flex-direction: column;
+      }
+
+      .intro,
+      .form-panel {
+        flex: none;
+        padding: 48px 28px;
+      }
+
+      .intro {
+        padding-top: 96px;
+      }
+
+      .back-link {
+        left: 28px;
+        top: 28px;
+      }
+
+      .field-row {
+        flex-direction: column;
+        gap: 0;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="page">
+
+    <section class="intro">
+      <div class="backdrop"></div>
+      <a class="back-link" href="index.html">← Vessel 60</a>
+      <div class="intro-content">
+        <h1>Contact us</h1>
+        <p>Interested in working together? Fill out some info and we'll be in touch shortly. We can't wait to hear from
+          you!</p>
+      </div>
+    </section>
+
+    <section class="form-panel">
+      <form action="#" method="POST">
+
+        <div class="field-row">
+          <div class="field">
+            <label for="firstName">First name <span class="req">(required)</span></label>
+            <input type="text" id="firstName" name="firstName" required>
+          </div>
+          <div class="field">
+            <label for="lastName">Last name <span class="req">(required)</span></label>
+            <input type="text" id="lastName" name="lastName" required>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="email">Email <span class="req">(required)</span></label>
+          <input type="email" id="email" name="email" required>
+        </div>
+
+        <div class="checkbox-field">
+          <input type="checkbox" id="newsletter" name="newsletter">
+          <label for="newsletter">Sign up for news and updates</label>
+        </div>
+
+        <div class="field">
+          <label for="message">Message <span class="req">(required)</span></label>
+          <textarea id="message" name="message" required></textarea>
+        </div>
+
+        <button type="submit">Submit</button>
+
+      </form>
+    </section>
+
+  </div>
+
+</body>
+
+</html>
