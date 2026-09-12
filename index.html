@@ -24,13 +24,19 @@
       font-display: swap;
     }
 
+    @font-face {
+      font-family: 'Nohemi';
+      src: url('fonts/Nohemi-Bold.woff2') format('woff2');
+      font-weight: 900;
+      font-display: swap;
+    }
+
     :root {
       color-scheme: light;
       --cream: rgba(243, 243, 219);
       --ink: rgba(51, 51, 51);
-      --ink-soft: rgba(51, 51, 51, 0.62);
+      --ink-soft: rgba(51, 51, 51, 0.7);
       --ring: rgba(255, 255, 255);
-      --ring-soft: rgba(47, 47, 49, 0.7);
     }
 
     * {
@@ -106,12 +112,65 @@
       -webkit-mask-image: radial-gradient(circle, black 55%, transparent 100%);
       mask-image: radial-gradient(circle, black 55%, transparent 100%);
       z-index: -1;
-      transition: transform 0.4s ease;
+      opacity: 0;
+      transition: transform 0.4s ease, opacity 0.25s ease;
     }
 
-    .ripple:hover::before,
+    .ripple:active::before,
     .ripple:focus-visible::before {
+      opacity: 1;
       transform: scale(1.08);
+    }
+
+    .wave {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 110px;
+      height: 110px;
+      border: 1.5px solid var(--ring);
+      border-radius: 50%;
+      opacity: 0;
+      transform: translate(-50%, -50%) scale(0.3);
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .mouse-wave {
+      position: fixed;
+      width: 70px;
+      height: 70px;
+      border: 1.5px solid var(--ink);
+      border-radius: 50%;
+      opacity: 0;
+      pointer-events: none;
+      transform: translate(-50%, -50%) scale(0.3);
+      z-index: 9999;
+      animation: sound-wave 0.9s ease-out forwards;
+    }
+
+    .ripple.pulse .wave-1 {
+      animation: sound-wave 0.9s ease-out forwards;
+    }
+
+    .ripple.pulse .wave-2 {
+      animation: sound-wave 0.9s ease-out 0.15s forwards;
+    }
+
+    .ripple.pulse .wave-3 {
+      animation: sound-wave 0.9s ease-out 0.3s forwards;
+    }
+
+    @keyframes sound-wave {
+      0% {
+        transform: translate(-50%, -50%) scale(0.3);
+        opacity: 0.9;
+      }
+
+      100% {
+        transform: translate(-50%, -50%) scale(1.6);
+        opacity: 0;
+      }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -126,15 +185,18 @@
       border-radius: 50%;
     }
 
-    .about {
+    .top-nav {
+      position: absolute;
       top: 120px;
       left: 50%;
       transform: translateX(-50%);
+      display: flex;
+      align-items: center;
+      gap: 28px;
     }
 
-    .about-label {
-      display: inline-block;
-      transform: translateY(-2px);
+    .top-nav .ripple {
+      position: relative;
     }
 
     .subscribe {
@@ -178,8 +240,9 @@
     }
 
     @media (max-width: 640px) {
-      .about {
+      .top-nav {
         top: 150px;
+        gap: 18px;
       }
 
       .subscribe {
@@ -212,7 +275,17 @@
   <div class="grain"></div>
 
   <main>
-    <a class="ripple about" href="#about"><span class="about-label">About</span></a>
+    <nav class="top-nav">
+      <a class="ripple" href="#about">About
+        <span class="wave wave-1"></span>
+        <span class="wave wave-2"></span>
+        <span class="wave wave-3"></span></a>
+      <a class="ripple" href="contact.html">Contact
+        <span class="wave wave-1"></span>
+        <span class="wave wave-2"></span>
+        <span class="wave wave-3"></span>
+      </a>
+    </nav>
     <div class="logo" aria-hidden="true"></div>
 
     <div class="hero">
@@ -220,9 +293,45 @@
       <p>Listening as a practice</p>
     </div>
 
-    <a class="ripple subscribe" href="#subscribe">Subscribe newsletter</a>
+    <a class="ripple subscribe" href="#subscribe">Subscribe newsletter
+      <span class="wave wave-1"></span>
+      <span class="wave wave-2"></span>
+      <span class="wave wave-3"></span>
+    </a>
   </main>
 
+  <script>
+    document.querySelectorAll('.ripple').forEach(function (el) {
+      el.addEventListener('click', function () {
+        el.classList.remove('pulse');
+        void el.offsetWidth;
+        el.classList.add('pulse');
+      });
+    });
+
+    let lastWaveTime = 0;
+    const waveInterval = 300;
+
+    document.addEventListener('mousemove', function (e) {
+      if (e.target.closest('.ripple')) return;
+
+      const now = Date.now();
+      if (now - lastWaveTime < waveInterval) return;
+      lastWaveTime = now;
+
+      for (let i = 0; i < 10; i++) {
+        const wave = document.createElement('span');
+        wave.className = 'mouse-wave';
+        wave.style.left = e.clientX + 'px';
+        wave.style.top = e.clientY + 'px';
+        wave.style.animationDelay = (i * 0.12) + 's';
+        document.body.appendChild(wave);
+        wave.addEventListener('animationend', function () {
+          wave.remove();
+        });
+      }
+    });
+  </script>
 </body>
 
 </html>
