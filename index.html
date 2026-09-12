@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vessel 60</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Host+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  @font-face {
+    font-family: 'Nohemi';
+    src: url('fonts/Nohemi-Regular.woff2') format('woff2');
+    font-weight: 400;
+    font-display: swap;
+}
+
+  @font-face {
+    font-family: 'Nohemi';
+    src: url('fonts/Nohemi-Medium.woff2') format('woff2');
+    font-weight: 500;
+    font-display: swap;
+  }
+
+  :root {
+    --cream: rgba(243, 243, 219);
+    --ink: rgba(51, 51, 51);
+    --ink-soft: rgba(51, 51, 51, 0.62);
+    --ring: rgba(255, 255, 255);
+    --ring-soft: rgba(47, 47, 49, 0.7);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html, body {
+    height: 100%;
+  }
+
+  body {
+    font-family: 'Nohemi', sans-serif;
+    background-color: var(--cream);
+    color: var(--ink);
+    overflow: hidden;
+    position: relative;
+  }
+
+  .backdrop {
+    position: fixed;
+    inset: 0;
+    background-image: url('assets/background-vessel.jpg');
+    background-size: cover;
+    background-position: left center;
+    opacity: 0.5;
+    mix-blend-mode: multiply;
+    -webkit-mask-image: linear-gradient(100deg, black 0%, black 32%, transparent 68%);
+    mask-image: linear-gradient(100deg, black 0%, black 32%, transparent 68%);
+    pointer-events: none;
+  }
+
+  .grain {
+    position: fixed;
+    inset: 0;
+    opacity: 0.05;
+    pointer-events: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  main {
+    position: relative;
+    height: 100vh;
+    width: 100vw;
+  }
+
+  /* Shared ripple treatment: concentric rings drawn with a repeating radial gradient */
+  .ripple {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color: var(--ink);
+    font-size: clamp(1rem, 2vw, 1.35rem);
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    white-space: nowrap;
+  }
+
+  .ripple::before {
+    content: '';
+    position: absolute;
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    background: repeating-radial-gradient(
+      circle,
+      var(--ring) 0px,
+      var(--ring) 2px,
+      transparent 2px,
+      transparent 15px
+    );
+    -webkit-mask-image: radial-gradient(circle, black 55%, transparent 100%);
+    mask-image: radial-gradient(circle, black 55%, transparent 100%);
+    z-index: -1;
+    transition: transform 0.4s ease;
+  }
+
+  .ripple:hover::before,
+  .ripple:focus-visible::before {
+    transform: scale(1.08);
+  }
+
+@media (prefers-reduced-motion: reduce) {
+  .ripple::after {
+    animation: none;
+  }
+}
+
+  .ripple:focus-visible {
+    outline: 2px solid var(--ink);
+    outline-offset: 6px;
+    border-radius: 50%;
+  }
+
+  .about {
+    top: 120px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .about-label {
+  display: inline-block;
+  transform: translateY(-2px);
+  }
+
+  .subscribe {
+    bottom: 64px;
+    right: 64px;
+  }
+
+  .logo {
+    position: absolute;
+    top: 40px;
+    right: 56px;
+    width: 58px;
+    height: 58px;
+    background-image: url('assets/logo-gris.png');
+    background-size: contain;
+  }
+
+  .hero {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 0 24px;
+  }
+
+  .hero h1 {
+    font-size: clamp(2.9rem, 8vw, 6.2rem);
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    line-height: 0.95;
+  }
+
+  .hero p {
+    margin-top: 18px;
+    font-family: 'Host Grotesk', sans-serif;
+    font-size: clamp(1rem, 1.8vw, 1.3rem);
+    font-weight: 500;
+    letter-spacing: 0.02em;
+  }
+
+  @media (max-width: 640px) {
+    .about { top: 150px; }
+    .subscribe { bottom: 70px; right: 24px; }
+    .logo { top: 24px; right: 24px; width: 38px; height: 38px; }
+    .ripple::before { width: 104px; height: 104px; }
+    .ripple { font-size: 0.85rem;}
+  }
+</style>
+</head>
+<body>
+
+  <div class="backdrop"></div>
+  <div class="grain"></div>
+
+  <main>
+    <a class="ripple about" href="#about"><span class="about-label">About</span></a>
+    <div class="logo" aria-hidden="true"></div>
+
+    <div class="hero">
+      <h1>VESSEL 60</h1>
+      <p>Listening as a practice</p>
+    </div>
+
+    <a class="ripple subscribe" href="#subscribe">Subscribe newsletter</a>
+  </main>
+
+</body>
+</html>
