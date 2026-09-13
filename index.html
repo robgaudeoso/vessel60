@@ -35,7 +35,7 @@
       color-scheme: light;
       --cream: rgba(243, 243, 219);
       --ink: rgba(51, 51, 51);
-      --ink-soft: rgba(51, 51, 51, 0.7);
+      --ink-soft: rgba(51, 51, 51, 0.62);
       --ring: rgba(255, 255, 255);
     }
 
@@ -116,19 +116,13 @@
       transition: transform 0.4s ease, opacity 0.25s ease;
     }
 
-    .ripple:active::before,
-    .ripple:focus-visible::before {
-      opacity: 1;
-      transform: scale(1.08);
-    }
-
     .wave {
       position: absolute;
       top: 50%;
       left: 50%;
       width: 110px;
       height: 110px;
-      border: 1.5px solid var(--ring);
+      border: 3px solid var(--ring);
       border-radius: 50%;
       opacity: 0;
       transform: translate(-50%, -50%) scale(0.3);
@@ -140,13 +134,13 @@
       position: fixed;
       width: 70px;
       height: 70px;
-      border: 1.5px solid var(--ink);
+      border: 3px solid var(--ink-soft);
       border-radius: 50%;
       opacity: 0;
       pointer-events: none;
-      transform: translate(-50%, -50%) scale(0.3);
+      transform: translate(-50%, -50%) scale(0.5);
       z-index: 9999;
-      animation: sound-wave 0.9s ease-out forwards;
+      animation: mouse-wave-grow 5s linear forwards;
     }
 
     .ripple.pulse .wave-1 {
@@ -169,6 +163,20 @@
 
       100% {
         transform: translate(-50%, -50%) scale(1.6);
+        opacity: 0;
+      }
+    }
+
+    @keyframes mouse-wave-grow {
+      0% {
+        width: 20px;
+        height: 20px;
+        opacity: 0.9;
+      }
+
+      100% {
+        width: 150vmax;
+        height: 150vmax;
         opacity: 0;
       }
     }
@@ -302,35 +310,48 @@
 
   <script>
     document.querySelectorAll('.ripple').forEach(function (el) {
-      el.addEventListener('click', function () {
+      el.addEventListener('click', function (e) {
+        const href = el.getAttribute('href');
+        const isExternalPage = href && !href.startsWith('#');
+
+        if (isExternalPage) {
+          e.preventDefault();
+        }
+
         el.classList.remove('pulse');
         void el.offsetWidth;
         el.classList.add('pulse');
+
+        if (isExternalPage) {
+          setTimeout(function () {
+            window.location.href = href;
+          }, 900);
+        }
       });
     });
 
-    let lastWaveTime = 0;
-    const waveInterval = 300;
+    let mouseX = null;
+    let mouseY = null;
+    let isOverRipple = false;
 
     document.addEventListener('mousemove', function (e) {
-      if (e.target.closest('.ripple')) return;
-
-      const now = Date.now();
-      if (now - lastWaveTime < waveInterval) return;
-      lastWaveTime = now;
-
-      for (let i = 0; i < 10; i++) {
-        const wave = document.createElement('span');
-        wave.className = 'mouse-wave';
-        wave.style.left = e.clientX + 'px';
-        wave.style.top = e.clientY + 'px';
-        wave.style.animationDelay = (i * 0.12) + 's';
-        document.body.appendChild(wave);
-        wave.addEventListener('animationend', function () {
-          wave.remove();
-        });
-      }
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+      isOverRipple = !!e.target.closest('.ripple');
     });
+
+    setInterval(function () {
+      if (mouseX === null || isOverRipple) return;
+
+      const wave = document.createElement('span');
+      wave.className = 'mouse-wave';
+      wave.style.left = mouseX + 'px';
+      wave.style.top = mouseY + 'px';
+      document.body.appendChild(wave);
+      wave.addEventListener('animationend', function () {
+        wave.remove();
+      });
+    }, 700);
   </script>
 </body>
 
