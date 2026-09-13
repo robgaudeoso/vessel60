@@ -233,10 +233,46 @@
     }
 
     .hero h1 {
+      display: inline-block;
+      transform-origin: center;
       font-size: clamp(2.9rem, 8vw, 6.2rem);
       font-weight: 500;
       letter-spacing: 0.01em;
       line-height: 0.95;
+    }
+
+    .hero h1:hover {
+      animation: speaker-thump 1.8s ease-in-out infinite;
+    }
+
+    @keyframes speaker-thump {
+
+      0%,
+      60%,
+      100% {
+        transform: scale(1) translate(0, 0);
+        filter: blur(0px);
+      }
+
+      15% {
+        transform: scale(1.045) translate(-1px, 0.5px);
+        filter: blur(0.8px);
+      }
+
+      30% {
+        transform: scale(1) translate(0, 0);
+        filter: blur(0px);
+      }
+
+      45% {
+        transform: scale(1.045) translate(-1px, 0.5px);
+        filter: blur(0.8px);
+      }
+
+      60% {
+        transform: scale(1) translate(0, 0);
+        filter: blur(0px);
+      }
     }
 
     .hero p {
@@ -274,6 +310,55 @@
         font-size: 0.85rem;
       }
     }
+
+    .eq-bars {
+      display: inline-flex;
+      align-items: flex-end;
+      gap: 3px;
+      height: 24px;
+      margin-left: 12px;
+      vertical-align: middle;
+      opacity: 0;
+      transition: opacity 0.2s ease;
+    }
+
+    .hero h1:hover .eq-bars {
+      opacity: 1;
+    }
+
+    .eq-bars span {
+      width: 4px;
+      background: var(--ink);
+      animation: eq-bounce 0.6s ease-in-out infinite;
+    }
+
+    .eq-bars span:nth-child(1) {
+      animation-delay: 0s;
+    }
+
+    .eq-bars span:nth-child(2) {
+      animation-delay: 0.15s;
+    }
+
+    .eq-bars span:nth-child(3) {
+      animation-delay: 0.3s;
+    }
+
+    .eq-bars span:nth-child(4) {
+      animation-delay: 0.1s;
+    }
+
+    @keyframes eq-bounce {
+
+      0%,
+      100% {
+        height: 6px;
+      }
+
+      50% {
+        height: 24px;
+      }
+    }
   </style>
 </head>
 
@@ -296,8 +381,17 @@
     </nav>
     <div class="logo" aria-hidden="true"></div>
 
-    <div class="hero">
+    <!-- <div class="hero">
       <h1>VESSEL 60</h1>
+      <p>Listening as a practice</p>
+    </div> -->
+
+    <div class="hero">
+      <h1>VESSEL 60
+        <span class="eq-bars">
+          <span></span><span></span><span></span><span></span>
+        </span>
+      </h1>
       <p>Listening as a practice</p>
     </div>
 
@@ -325,7 +419,7 @@
         if (isExternalPage) {
           setTimeout(function () {
             window.location.href = href;
-          }, 900);
+          }, 800);
         }
       });
     });
