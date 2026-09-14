@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="light">
+  <title>About — Vessel 60</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Host+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    @font-face {
+      font-family: 'Nohemi';
+      src: url('fonts/Nohemi-Regular.woff2') format('woff2');
+      font-weight: 400;
+      font-display: swap;
+    }
+
+    @font-face {
+      font-family: 'Nohemi';
+      src: url('fonts/Nohemi-Medium.woff2') format('woff2');
+      font-weight: 500;
+      font-display: swap;
+    }
+
+    @font-face {
+      font-family: 'Nohemi';
+      src: url('fonts/Nohemi-Bold.woff2') format('woff2');
+      font-weight: 900;
+      font-display: swap;
+    }
+
+    :root {
+      color-scheme: light;
+      --cream: rgba(243, 243, 219);
+      --ink: rgba(51, 51, 51);
+      --ink-soft: rgba(51, 51, 51, 0.62);
+      --ring: rgba(255, 255, 255);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      min-height: 100%;
+    }
+
+    body {
+      font-family: 'Nohemi', sans-serif;
+      background-color: var(--cream);
+      color: var(--ink);
+      position: relative;
+    }
+
+    .backdrop {
+      position: fixed;
+      inset: 0;
+      background-image: url('assets/background-vessel.jpg');
+      background-size: cover;
+      background-position: left center;
+      opacity: 0.35;
+      mix-blend-mode: multiply;
+      -webkit-mask-image: linear-gradient(100deg, black 0%, black 22%, transparent 55%);
+      mask-image: linear-gradient(100deg, black 0%, black 22%, transparent 55%);
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .grain {
+      position: fixed;
+      inset: 0;
+      opacity: 0.05;
+      pointer-events: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      z-index: -1;
+    }
+
+    .top-nav {
+      position: fixed;
+      top: 40px;
+      left: 0;
+      right: 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 56px;
+      z-index: 10;
+    }
+
+    .top-nav a {
+      text-decoration: none;
+      color: var(--ink);
+      font-family: 'Host Grotesk', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 500;
+      letter-spacing: 0.01em;
+    }
+
+    .top-nav a:hover {
+      opacity: 0.7;
+    }
+
+    .logo {
+      width: 46px;
+      height: 46px;
+      background-image: url('assets/logo-gris.png');
+      background-size: contain;
+      background-repeat: no-repeat;
+    }
+
+    main {
+      position: relative;
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 160px 24px 120px;
+    }
+
+    main h1 {
+      font-size: clamp(2.75rem, 6vw, 4.5rem);
+      font-weight: 900;
+      letter-spacing: 0.01em;
+      line-height: 0.95;
+      margin-bottom: 48px;
+    }
+
+    main p {
+      font-family: 'Host Grotesk', sans-serif;
+      font-size: clamp(1rem, 1.4vw, 1.15rem);
+      font-weight: 400;
+      line-height: 1.65;
+      color: var(--ink-soft);
+      margin-bottom: 28px;
+      max-width: 62ch;
+    }
+
+    main p.closing {
+      color: var(--ink);
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      font-size: clamp(1rem, 1.5vw, 1.2rem);
+      margin-top: 48px;
+    }
+
+    @media (max-width: 640px) {
+      .top-nav {
+        top: 24px;
+        padding: 0 24px;
+      }
+
+      .logo {
+        width: 36px;
+        height: 36px;
+      }
+
+      main {
+        padding: 120px 20px 80px;
+      }
+
+      main h1 {
+        margin-bottom: 36px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="backdrop"></div>
+  <div class="grain"></div>
+
+  <nav class="top-nav">
+    <a href="index.html">← Vessel 60</a>
+  </nav>
+
+  <div class="logo" aria-hidden="true" style="position: fixed; top: 34px; right: 56px; z-index: 10;"></div>
+
+  <main>
+    <h1>About</h1>
+
+    <p>VESSEL 60 is an independent cultural platform based in Dublin, exploring listening as practice.</p>
+
+    <p>Through sound, music, art, design and conversation, we create spaces that invite people to slow down, pay
+      attention and connect — with what they hear, with where they are, and with one another.</p>
+
+    <p>At the centre of VESSEL is a bespoke high-fidelity sound system, built as a physical expression of this
+      philosophy and designed to travel across our Gatherings and Listening Sessions.</p>
+
+    <p>The name VESSEL 60 comes from the relationship between sound, vibration, water and the body. A vessel is
+      something that holds, carries and transmits. Our bodies are largely made of water, and sound reaches us through
+      vibration — something we don't only hear, but physically experience.</p>
+
+    <p>For us, a room can become a vessel too: for sound, people, ideas, attention and shared experience.</p>
+
+    <p>VESSEL 60 creates space for listening to become the central act.</p>
+
+    <p class="closing">Arrive. Settle. Listen. Feel. Reflect. Connect.</p>
+  </main>
+
+</body>
+
+</html>
