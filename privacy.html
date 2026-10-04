@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="light">
+  <title>Privacy Policy — Vessel 60</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Host+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    @font-face {
+      font-family: 'Nohemi';
+      src: url('fonts/Nohemi-Regular.woff2') format('woff2');
+      font-weight: 400;
+      font-display: swap;
+    }
+
+    @font-face {
+      font-family: 'Nohemi';
+      src: url('fonts/Nohemi-Medium.woff2') format('woff2');
+      font-weight: 500;
+      font-display: swap;
+    }
+
+    @font-face {
+      font-family: 'Nohemi';
+      src: url('fonts/Nohemi-Bold.woff2') format('woff2');
+      font-weight: 900;
+      font-display: swap;
+    }
+
+    :root {
+      color-scheme: light;
+      --cream: rgba(243, 243, 219);
+      --ink: rgba(51, 51, 51);
+      --ink-soft: rgba(51, 51, 51, 0.7);
+      --ring: rgba(255, 255, 255);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      min-height: 100%;
+    }
+
+    body {
+      font-family: 'Nohemi', sans-serif;
+      background-color: var(--cream);
+      color: var(--ink);
+      position: relative;
+    }
+
+    .backdrop {
+      position: fixed;
+      inset: 0;
+      background-image: url('assets/background-vessel.jpg');
+      background-size: cover;
+      background-position: left center;
+      opacity: 0.25;
+      mix-blend-mode: multiply;
+      -webkit-mask-image: linear-gradient(100deg, black 0%, black 15%, transparent 40%);
+      mask-image: linear-gradient(100deg, black 0%, black 15%, transparent 40%);
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .grain {
+      position: fixed;
+      inset: 0;
+      opacity: 0.05;
+      pointer-events: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      z-index: -1;
+    }
+
+    .top-nav {
+      position: fixed;
+      top: 40px;
+      left: 0;
+      right: 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 56px;
+      z-index: 10;
+    }
+
+    .top-nav a {
+      text-decoration: none;
+      color: var(--ink);
+      font-family: 'Host Grotesk', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 500;
+      letter-spacing: 0.01em;
+    }
+
+    .top-nav a:hover {
+      opacity: 0.7;
+    }
+
+    .logo {
+      position: fixed;
+      top: 34px;
+      right: 56px;
+      width: 46px;
+      height: 46px;
+      background-image: url('assets/logo-gris.png');
+      background-size: contain;
+      background-repeat: no-repeat;
+      z-index: 10;
+    }
+
+    main {
+      position: relative;
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 160px 24px 120px;
+    }
+
+    main h1 {
+      font-size: clamp(2.25rem, 5vw, 3.25rem);
+      font-weight: 900;
+      letter-spacing: 0.01em;
+      line-height: 0.95;
+      margin-bottom: 12px;
+    }
+
+    .effective-date {
+      font-family: 'Host Grotesk', sans-serif;
+      font-size: 0.9rem;
+      color: var(--ink-soft);
+      margin-bottom: 48px;
+    }
+
+    main h2 {
+      font-family: 'Host Grotesk', sans-serif;
+      font-size: clamp(1.1rem, 2vw, 1.3rem);
+      font-weight: 600;
+      margin-top: 44px;
+      margin-bottom: 16px;
+    }
+
+    main p,
+    main li {
+      font-family: 'Host Grotesk', sans-serif;
+      font-size: clamp(0.95rem, 1.2vw, 1.05rem);
+      font-weight: 400;
+      line-height: 1.65;
+      color: var(--ink-soft);
+      max-width: 64ch;
+    }
+
+    main p {
+      margin-bottom: 20px;
+    }
+
+    main ul {
+      margin: 0 0 20px 0;
+      padding-left: 22px;
+    }
+
+    main li {
+      margin-bottom: 10px;
+    }
+
+    main a.inline-link {
+      color: var(--ink);
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+
+    @media (max-width: 640px) {
+      .top-nav {
+        top: 24px;
+        padding: 0 24px;
+      }
+
+      .logo {
+        top: 24px;
+        right: 24px;
+        width: 36px;
+        height: 36px;
+      }
+
+      main {
+        padding: 110px 20px 80px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="backdrop"></div>
+  <div class="grain"></div>
+
+  <nav class="top-nav">
+    <a href="index.html">← Vessel 60</a>
+  </nav>
+
+  <div class="logo" aria-hidden="true"></div>
+
+  <main>
+    <h1>Privacy Policy</h1>
+    <p class="effective-date">Last updated: October 4, 2026</p>
+
+    <p>VESSEL 60 ("we", "us", "our") is an independent cultural platform based in Dublin, Ireland. This policy explains
+      what personal information we collect, why we collect it, and how we use it when you get in touch with us or
+      subscribe to our newsletter.</p>
+
+    <h2>Information we collect</h2>
+    <p>We collect personal information directly from you in two situations:</p>
+    <ul>
+      <li><strong>Contact form:</strong> when you fill out our contact form, we collect your first name, last name,
+        email address and the message you send us.</li>
+      <li><strong>Newsletter subscription:</strong> when you subscribe to our newsletter, we collect your email address.
+      </li>
+    </ul>
+
+    <h2>How we use your information</h2>
+    <p>We use the information you provide to:</p>
+    <ul>
+      <li>Respond to your enquiry or message.</li>
+      <li>Send you updates, news and communications about VESSEL 60 — including Gatherings, Listening Sessions and other
+        activities — if you have opted in to receive them (either by subscribing to our newsletter, or by checking "Sign
+        up for news and updates" on our contact form).</li>
+    </ul>
+    <p>We do not use your information for any purpose beyond what is described above, and we do not sell or rent your
+      personal information to third parties.</p>
+
+    <h2>Legal basis for processing</h2>
+    <p>We process your personal information on the basis of your <strong>consent</strong> — given when you submit the
+      contact form or subscribe to our newsletter. You can withdraw this consent at any time (see "Your rights" below).
+    </p>
+
+    <h2>How long we keep your information</h2>
+    <p>We retain your information for as long as you remain subscribed to our communications, or until you ask us to
+      delete it. If you unsubscribe or request deletion, we will remove your information within a reasonable timeframe,
+      except where we are required to retain it for legal reasons.</p>
+
+    <h2>Data storage and security</h2>
+    <p>We take reasonable technical and organisational measures to protect your personal information against
+      unauthorised access, loss or misuse. Your information may be stored using third-party service providers (for
+      example, email or newsletter platforms); where this is the case, those providers process your data on our behalf
+      and in accordance with their own privacy and security practices.</p>
+
+    <h2>Your rights</h2>
+    <p>If you are based in the European Union / European Economic Area, you have rights under the General Data
+      Protection Regulation (GDPR), including the right to:</p>
+    <ul>
+      <li>Access the personal information we hold about you.</li>
+      <li>Correct inaccurate information.</li>
+      <li>Request deletion of your information ("right to be forgotten").</li>
+      <li>Withdraw your consent and unsubscribe from our communications at any time.</li>
+      <li>Lodge a complaint with the Irish Data Protection Commission (DPC) if you believe your data has been
+        mishandled.</li>
+    </ul>
+    <p>To exercise any of these rights, please contact us using the details below.</p>
+
+    <h2>Unsubscribing</h2>
+    <p>You can unsubscribe from our newsletter at any time using the unsubscribe link included in our emails, or by
+      contacting us directly.</p>
+
+    <h2>Changes to this policy</h2>
+    <p>We may update this policy from time to time. Any changes will be posted on this page with an updated effective
+      date.</p>
+
+    <h2>Contact us</h2>
+    <p>If you have any questions about this policy or how we handle your information, please get in touch via our <a
+        class="inline-link" href="contact.html">contact page</a>.</p>
+  </main>
+
+</body>
+
+</html>
