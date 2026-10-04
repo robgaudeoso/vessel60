@@ -302,6 +302,102 @@
       text-decoration: underline;
     }
 
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.4);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 10000;
+      padding: 24px;
+    }
+
+    .modal-overlay.open {
+      display: flex;
+    }
+
+    .modal-card {
+      position: relative;
+      background: var(--cream);
+      border-radius: 24px;
+      padding: 40px;
+      max-width: 420px;
+      width: 100%;
+      text-align: center;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      color: var(--ink-soft);
+      cursor: pointer;
+      line-height: 1;
+    }
+
+    .modal-close:hover {
+      color: var(--ink);
+    }
+
+    .modal-card h2 {
+      font-family: 'Nohemi', sans-serif;
+      font-weight: 500;
+      font-size: 1.6rem;
+      margin-bottom: 12px;
+    }
+
+    .modal-card p {
+      font-family: 'Host Grotesk', sans-serif;
+      font-size: 0.9rem;
+      color: var(--ink-soft);
+      line-height: 1.5;
+      margin-bottom: 24px;
+    }
+
+    .subscribe-form {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .subscribe-form input[type="email"] {
+      height: 46px;
+      padding: 0 18px;
+      border: 1px solid rgba(51, 51, 51, 0.35);
+      border-radius: 999px;
+      background: transparent;
+      font-family: 'Host Grotesk', sans-serif;
+      font-size: 0.95rem;
+      color: var(--ink);
+      outline: none;
+    }
+
+    .subscribe-form input[type="email"]:focus {
+      border-color: var(--ink);
+    }
+
+    .subscribe-form button[type="submit"] {
+      height: 46px;
+      background: var(--ink);
+      color: var(--cream);
+      border: none;
+      border-radius: 999px;
+      font-family: 'Host Grotesk', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      cursor: pointer;
+    }
+
+    .subscribe-form button[type="submit"]:hover {
+      opacity: 0.85;
+    }
+
     @media (max-width: 640px) {
       .top-nav {
         top: 150px;
@@ -369,6 +465,24 @@
     </a>
   </main>
 
+  <div class="modal-overlay" id="subscribeModal">
+    <div class="modal-card">
+      <button class="modal-close" id="modalClose" aria-label="Close">&times;</button>
+      <h2>Subscribe</h2>
+      <p>Get news on Gatherings, Listening Sessions and what we're exploring at Vessel 60.</p>
+
+      <!--
+      SUBSTITUA a action abaixo pela URL que o Brevo te der no formulário
+      embed. O Brevo também pode pedir campos hidden extras (tipo
+      "email_address_check" ou um token) — cole exatamente como ele gerar.
+    -->
+      <form class="subscribe-form" action="SUA_ACTION_URL_DO_BREVO_AQUI" method="POST" target="_blank">
+        <input type="email" name="EMAIL" placeholder="your@email.com" required>
+        <button type="submit">Subscribe</button>
+      </form>
+    </div>
+  </div>
+
   <script>
     document.querySelectorAll('.ripple').forEach(function (el) {
       el.addEventListener('click', function (e) {
@@ -413,6 +527,31 @@
         wave.remove();
       });
     }, 700);
+
+    const subscribeLink = document.querySelector('.subscribe');
+    const subscribeModal = document.getElementById('subscribeModal');
+    const modalClose = document.getElementById('modalClose');
+
+    subscribeLink.addEventListener('click', function (e) {
+      e.preventDefault();
+      subscribeModal.classList.add('open');
+    });
+
+    modalClose.addEventListener('click', function () {
+      subscribeModal.classList.remove('open');
+    });
+
+    subscribeModal.addEventListener('click', function (e) {
+      if (e.target === subscribeModal) {
+        subscribeModal.classList.remove('open');
+      }
+    });
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') {
+        subscribeModal.classList.remove('open');
+      }
+    });
   </script>
 </body>
 
