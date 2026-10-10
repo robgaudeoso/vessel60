@@ -62,7 +62,7 @@
       min-height: 100dvh;
       display: flex;
     }
-    
+
     .intro {
       position: relative;
       flex: 1 1 42%;
@@ -123,7 +123,6 @@
       text-decoration: underline;
     }
 
-    /* Right panel: form */
     .form-panel {
       flex: 1 1 58%;
       display: flex;
@@ -278,8 +277,9 @@
     </section>
 
     <section class="form-panel">
-      <form action="#" method="POST">
-
+      <form action="https://api.web3forms.com/submit" method="POST">
+        <input type="hidden" name="access_key" value="755bed43-6cd9-4542-87f1-763a29213568">
+        <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
         <div class="field-row">
           <div class="field">
             <label for="firstName">First name <span class="req">(required)</span></label>
