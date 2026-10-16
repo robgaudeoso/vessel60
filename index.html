@@ -398,6 +398,26 @@
       opacity: 0.85;
     }
 
+    .subscribe-form button[type="submit"]:disabled {
+      opacity: 0.6;
+      cursor: default;
+    }
+
+    .modal-card .form-message {
+      font-family: 'Host Grotesk', sans-serif;
+      font-size: 0.85rem;
+      min-height: 1.2em;
+      margin-top: 4px;
+    }
+
+    .modal-card .form-message.success {
+      color: #2e6b3f;
+    }
+
+    .modal-card .form-message.error {
+      color: #8a2b2b;
+    }
+
     @media (max-width: 640px) {
       .top-nav {
         top: 150px;
@@ -471,14 +491,16 @@
       <h2>Subscribe</h2>
       <p>Get news on Gatherings, Listening Sessions and what we're exploring at Vessel 60.</p>
 
-      <!--
-      SUBSTITUA a action abaixo pela URL que o Brevo te der no formulário
-      embed. O Brevo também pode pedir campos hidden extras (tipo
-      "email_address_check" ou um token) — cole exatamente como ele gerar.
-    -->
-      <form class="subscribe-form" action="SUA_ACTION_URL_DO_BREVO_AQUI" method="POST" target="_blank">
-        <input type="email" name="EMAIL" placeholder="your@email.com" required>
+      <form class="subscribe-form" id="subscribeForm"
+        action="https://61b94f45.sibforms.com/serve/MUIFADfkM29BXCQBAnOXPNNyT76R2pYMRrSA_8XRK5-fN9fVi9vLoqiQL2FHMHlmQtMtpfa109YYJKbE41T3ey9_KyeKzQc9dxR_wJY8rbRmm4l4paCwBBEO7tkN0xNjK-Jh-BQZIG92TAQ6oJcqbkjvs0Cf3ijB3-rVbls5hI8cliuwpUpuhnXY6v6EFvYab7E0_RhTs4Pdj9Ng6A=="
+        method="POST">
+        <input type="email" name="EMAIL" placeholder="your@email.com" required autocomplete="email">
+        <input type="text" name="email_address_check" value="" tabindex="-1" autocomplete="off" aria-hidden="true"
+          style="display: none;">
+        <input type="hidden" name="locale" value="en">
+
         <button type="submit">Subscribe</button>
+        <div class="form-message" id="subscribeMessage" role="status" aria-live="polite"></div>
       </form>
     </div>
   </div>
@@ -550,6 +572,40 @@
     document.addEventListener('keydown', function (e) {
       if (e.key === 'Escape') {
         subscribeModal.classList.remove('open');
+      }
+    });
+
+    const subscribeForm = document.getElementById('subscribeForm');
+    const subscribeMessage = document.getElementById('subscribeMessage');
+
+    subscribeForm.addEventListener('submit', async function (e) {
+      e.preventDefault();
+
+      const button = subscribeForm.querySelector('button[type="submit"]');
+      button.disabled = true;
+      subscribeMessage.textContent = '';
+      subscribeMessage.className = 'form-message';
+
+      try {
+        const response = await fetch(subscribeForm.getAttribute('action') + '?isAjax=1', {
+          method: 'POST',
+          body: new FormData(subscribeForm)
+        });
+        const data = await response.json();
+
+        if (data.success) {
+          subscribeMessage.textContent = data.message || 'Thank you for subscribing.';
+          subscribeMessage.classList.add('success');
+          subscribeForm.reset();
+        } else {
+          subscribeMessage.textContent = data.message || 'Your subscription could not be saved. Please try again.';
+          subscribeMessage.classList.add('error');
+        }
+      } catch (err) {
+        subscribeMessage.textContent = 'Something went wrong. Please try again.';
+        subscribeMessage.classList.add('error');
+      } finally {
+        button.disabled = false;
       }
     });
   </script>
